@@ -22,7 +22,7 @@ export interface User {
 }
 export interface Reply {
   id: string;
-  author: string;
+  author: User;
   content: string;
   likes: number;
   createdAt: string;
