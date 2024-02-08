@@ -9,27 +9,31 @@ import {
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 import Lottie from "lottie-react-native";
+import { useRef } from "react";
 
 export default function TabOneScreen() {
-  return (
-    <SafeAreaView>
-      <ScrollView
-        contentContainerStyle={{
-          backgroundColor: "gray",
-          paddingHorizontal: 10,
-          paddingTop: Platform.select({ android: 30 }),
-        }}
-        refreshControl={
-          <RefreshControl refreshing={false} tintColor={"transparent"} />
-        }
-      >
-        <Lottie
-          source={require("../../lottier-animation/threads.json")}
-          loop={false}
-          autoPlay
-          style={{ width: 90, height: 90, alignItems: "center" }}
+  const animationRef = useRef<Lottie>(null);
+  <SafeAreaView>
+    <ScrollView
+      contentContainerStyle={{
+        paddingHorizontal: 10,
+        paddingTop: Platform.select({ android: 30 }),
+      }}
+      refreshControl={
+        <RefreshControl
+          onRefresh={() => {animationRef.current?.play}}
+          refreshing={false}
+          tintColor={"transparent"}
         />
-      </ScrollView>
-    </SafeAreaView>
-  );
+      }
+    >
+      <Lottie
+        ref={animationRef}
+        source={require("../../lottier-animation/threads.json")}
+        loop={false}
+        autoPlay
+        style={{ width: 90, height: 90, alignItems: "center" }}
+      />
+    </ScrollView>
+  </SafeAreaView>;
 }
