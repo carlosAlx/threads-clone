@@ -3,7 +3,7 @@ export interface Threads {
   author: User;
   content: string;
   image?: string;
-  replies?: Reply[];
+  replies: Reply[];
   repliesCount: number;
   likesCount: number;
   mention?: boolean;
