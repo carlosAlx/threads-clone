@@ -8,10 +8,13 @@ import {
 import { Text, View } from "@/components/Themed";
 import Lottie from "lottie-react-native";
 import * as React from "react";
+import { ThreadsContext } from "@/context/thread-content";
+import { ThreadsItem } from "@/components/ThreadsItem";
 
 export default function TabOneScreen() {
   console.log("certo");
   const animationRef = React.useRef<Lottie>(null);
+  const threads = React.useContext(ThreadsContext);
   return (
     <SafeAreaView>
       <ScrollView
@@ -36,6 +39,9 @@ export default function TabOneScreen() {
           autoPlay
           style={{ width: 90, height: 90, alignItems: "center" }}
         />
+        {threads.map((thread) => (
+          <ThreadsItem key={thread.id} {...thread} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
